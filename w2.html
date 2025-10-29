@@ -26,13 +26,7 @@
   <canvas id="canvas"></canvas>
  
   <script>
-    let model;   // holds the loaded face-detection model
-
-    // // Step 1: Load BlazeFace model when page opens
-    // blazeface.load().then(m => {
-    //   model = m;
-    //   alert("✅ Model Loaded — Ready to detect faces!");
-    // });
+    let model;   
 
 //      // Step 1: Load the model
   blazeface.load().then(function(m) {
@@ -55,32 +49,12 @@
         canvas.height = img.height;
         ctx.drawImage(img, 0, 0);
 
-
-//         The img.onload function runs after the image has fully loaded.
-// Inside it, we get the canvas element, prepare a 2D drawing context, set the canvas size equal to the image size, and then draw the image on the canvas.
-// This allows the face detection model to analyze the image/ pixels later.”
-
         // Step 3: Detect faces
         const faces = await model.estimateFaces(canvas);
         if (faces.length === 0) {
           alert("No faces found!");
           return;
         }
-
-        //model.estimateFaces(canvas)
-// 👉 This tells the BlazeFace model to look at the image drawn on the canvas and find all the faces.
-// It returns a list (array) of all faces it detects — each face has coordinates like top-left and bottom-right points.
-
-// await
-// 👉 Means “wait until the model finishes checking the image.”
-// (Because detection takes a little time.)
-
-// faces.length === 0
-// 👉 Checks if the model found zero faces.
-// If yes, it shows an alert message — “No faces found!” — and stops the function.
-
-
-
         // Step 4: Draw red rectangles around detected faces
         ctx.strokeStyle = "red";
         ctx.lineWidth = 2;
